@@ -43,7 +43,7 @@ class HTTPHandler(SimpleHTTPRequestHandler):
         path = os.path.realpath(path)  # Avoid symlink hacks
         if self.directory:  # Ensure proper subdirectory
             base = os.path.abspath(self.directory)
-            if not os.path.abspath(path).startswith(base):
+            if not os.path.realpath(path).startswith(base):
                 self.send_error(HTTPStatus.FORBIDDEN, "Path is not in the frontend directory")
                 return ''
         return path
